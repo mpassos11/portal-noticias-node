@@ -1,8 +1,17 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const path = require('path');
 
 const app = express();
+
+mongoose.connect(`mongodb+srv://root:${process.env.PASSWORD_MONGODB}@cluster0.gvzza.mongodb.net/?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }).then(function() {
+    console.log('Connected to MongoDB...');
+}).catch(function(err) {
+    console.error(err.message);
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
