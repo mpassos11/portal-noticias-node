@@ -160,6 +160,10 @@ section.outras-noticias h2 {
     padding: 20px;
 }
 
+.conteudo-noticia-single h3 {
+    text-transform: uppercase;
+}
+
 .box-ultima-single img {
     width: 100%;
     border-top-left-radius: 10px;

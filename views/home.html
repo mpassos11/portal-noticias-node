@@ -22,24 +22,17 @@
                 <br><br>
                 <div class="center">
                     <div class="ultimas">
-                        <div class="box-ultima-single">
-                            <img src="/public/images/noticia.png">
-                            <div class="conteudo-noticia-single">
-                                <h3>Natureza e Geral</h3>
-                                <h2>Como encarar o surf em Floripa</h2>
-                                <p>A água gelada e o vento pode acabar com a sua felicidade de ir para a água. Cientistas afirmam que a chance de hipotermia é real e você precisa se cuidar. Veja como.</p>
-                                <a href="/encarar-o-surf">Saiba Mais</a>
+                        <% for (let i = 1; i < posts.length; i++) { %>
+                            <div class="box-ultima-single">
+                                <img src="<%= posts[i].imagem %>">
+                                <div class="conteudo-noticia-single">
+                                    <h3><%= posts[i].categoria %></h3>
+                                    <h2><%= posts[i].titulo %></h2>
+                                    <p><%- posts[i].descricaoCurta %>...</p>
+                                    <a href="/<%= posts[i].slug %>">Saiba Mais</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="box-ultima-single">
-                            <img src="/public/images/noticia.png">
-                            <div class="conteudo-noticia-single">
-                                <h3>Natureza e Geral</h3>
-                                <h2>Como encarar o surf em Floripa</h2>
-                                <p>A água gelada e o vento pode acabar com a sua felicidade de ir para a água. Cientistas afirmam que a chance de hipotermia é real e você precisa se cuidar. Veja como.</p>
-                                <a href="/encarar-o-surf">Saiba Mais</a>
-                            </div>
-                        </div>
+                        <% } %>
                     </div>
                     <%- include('partials/mais-lidas.html') %>
                 </div>
