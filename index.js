@@ -29,7 +29,7 @@ app.get('/', function (req, res) {
             posts = posts.map(function(val) {
                 val.descricaoCurta = val.conteudo.substr(0, 100);
                 return val;
-            })
+            });
             res.render('home', { posts: posts });
         });
     } else {
@@ -38,8 +38,15 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:slug', function(req, res) {
-    //res.send(req.params.slug);
-    res.render('single', {});
+    Posts.findOneAndUpdate({ slug: req.params.slug }, {$inc : {'views': 1}}, function(err, post) {
+        Posts.find({}).sort({ '_id': -1 }).exec(function (err, posts) {
+            posts = posts.map(function(val) {
+                val.descricaoCurta = val.conteudo.substr(0, 100);
+                return val;
+            });
+            res.render('single', { post: post, posts: posts });
+        });
+    });
 });
 
 app.listen(5000, function() {
