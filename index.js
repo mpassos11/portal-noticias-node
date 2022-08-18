@@ -16,12 +16,13 @@ app.get('/', function (req, res) {
     if (req.query.busca == null) {
         res.render('home', {});
     } else {
-        res.send('Você buscou por: ' + req.query.busca);
+        res.render('busca', {});
     }
 });
 
 app.get('/:slug', function(req, res) {
-    res.send(req.params.slug);
+    //res.send(req.params.slug);
+    res.render('single', {});
 });
 
 app.listen(5000, function() {
