@@ -30,7 +30,15 @@ app.get('/', function (req, res) {
                 val.descricaoCurta = val.conteudo.substr(0, 100);
                 return val;
             });
-            res.render('home', { posts: posts });
+            
+            Posts.find({}).limit(3).sort({ 'views': -1 }).exec(function(err, topPosts) {
+                topPosts = topPosts.map(function(val) {
+                    val.descricaoCurta = val.conteudo.substr(0, 100);
+                    return val;
+                });
+
+                res.render('home', { posts: posts, topPosts: topPosts });
+            });
         });
     } else {
         res.render('busca', {});
@@ -39,13 +47,17 @@ app.get('/', function (req, res) {
 
 app.get('/:slug', function(req, res) {
     Posts.findOneAndUpdate({ slug: req.params.slug }, {$inc : {'views': 1}}, function(err, post) {
-        Posts.find({}).sort({ '_id': -1 }).exec(function (err, posts) {
-            posts = posts.map(function(val) {
-                val.descricaoCurta = val.conteudo.substr(0, 100);
-                return val;
+        if (post != null) {
+            Posts.find({}).limit(3).sort({ 'views': -1 }).exec(function (err, topPosts) {
+                topPosts = topPosts.map(function(val) {
+                    val.descricaoCurta = val.conteudo.substr(0, 100);
+                    return val;
+                });
+                res.render('single', { post: post, topPosts: topPosts });
             });
-            res.render('single', { post: post, posts: posts });
-        });
+        } else {
+            res.redirect('/');
+        }
     });
 });
 
