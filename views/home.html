@@ -6,10 +6,12 @@
                 <div class="img-destaque">
                     <div class="overlay-destaque"></div>
                     <div class="title-destaque-descricao">
-                        <h2>Quer fugir das praias de verão?</h2>
-                        <p>Donec vitae libero convallis, tempus mauris ac, pretium arcu. Cras mattis ultrices eros, sed luctus eros. Nam pe...</p>
+                        <h2>
+                            <a href="/<%= posts[0].slug %>"><%= posts[0].titulo %></a>
+                        </h2>
+                        <p><%- posts[0].descricaoCurta %>...</p>
                     </div>
-                    <img src="/public/images/landscape.png">
+                    <img src="<%= posts[0].imagem %>">
                 </div>
             </div>
         </section>
