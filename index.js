@@ -41,7 +41,13 @@ app.get('/', function (req, res) {
             });
         });
     } else {
-        res.render('busca', {});
+        Posts.find({ titulo: { $regex: req.query.busca, $options: 'i' } }, function (err, posts) {
+            posts = posts.map(function(val) {
+                val.descricaoCurta = val.conteudo.substr(0, 100);
+                return val;
+            });
+            res.render('busca', { posts: posts, contagem: posts.length });
+        });
     }
 });
 
